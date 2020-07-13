@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #e0e0e0;
+      }
+      .imgaccountbackground {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglogo {
+        position: absolute;
+        top: 47px;
+        left: 300px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 47px;
+        right: 300px;
+      }
+      .sendform {
+        position: absolute;
+        top: 200px;
+        left: 600px;
+      }
+      .imgsend {
+        position: absolute;
+        top: 100px;
+        left: 160px;
+      }
+      .sendformform {
+        position: absolute;
+        top: 250px;
+        left: 160px;
+      }
+      .buttongray {
+        background-color: #ffffff; /* Green */
+        border: none;
+        color: black;
+        padding: 10px 145px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 0px 0px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 15pt;
+      }
+    </style>
+  </head>
+  <%- include('../header'); %>
+  <body>
+    <%#- include("../menu"); %>
+
+    <div class="parent" style="height: 100vh;">
+      <a href="/api/point">
+        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/point">
+          <img
+            src="/images/list/cancel.png"
+            width="33px"
+            style="margin-right: 35px;"
+          />
+        </a>
+      </div>
+      <div class="sendform">
+        <img
+          class="imgaccountbackground"
+          src="/images/account/account_background.png"
+          width="722"
+        />
+        <img class="imgsend" src="/images/list/sendpointtext.png" width="400" />
+        <div class="sendformform" style="width: 400px;">
+          <form id="sendForm" class="text-center" action="#!">
+            <select name="service" id="service" required style="width: 400px;">
+              <% result.forEach(point => { %>
+              <option value="<%= point.service %>"><%= point.service %></option>
+              <% }) %>
+            </select>
+            <!-- Email -->
+            <div style="margin-top: 30px;">
+              <input
+                type="number"
+                id="balance"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="금액"
+              />
+            </div>
+
+            <!-- Password -->
+            <div style="margin-top: 30px;">
+              <input
+                type="string"
+                id="recipient"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="받는 사람 Email"
+                aria-describedby="materialRegisterFormPasswordHelpBlock"
+              />
+            </div>
+
+            <div style="margin-top: 30px;">
+              <button class="buttongray" type="submit">포인트 보내기</button>
+            </div>
+            <!-- Sign in button -->
+          </form>
+        </div>
+      </div>
+    </div>
+    <select name="cars" id="cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <%- include('../footer'); %>
+    <script>
+      $(function () {
+        $("#sendForm").submit((event) => {
+          event.preventDefault();
+
+          const service = $("#service").val();
+          const balance = $("#balance").val();
+          const recipient = $("#recipient").val();
+
+          console.log(service + "\n" + balance + "\n" + recipient);
+
+          $.ajax({
+            url: "/api/point/send",
+            type: "POST",
+            data: { service, balance, recipient },
+          })
+            .done(() => {
+              alert("포인트 보내기가 완료되었습니다!");
+              location.href = "/api/point/";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

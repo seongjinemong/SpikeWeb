@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      @keyframes example {
+        from {
+          top: 180px;
+        }
+        to {
+          top: 220px;
+        }
+      }
+
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #e0e0e0;
+      }
+      .imgspaceblue {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglogo {
+        position: absolute;
+        top: 47px;
+        left: 300px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 47px;
+        right: 300px;
+      }
+      .imgstars {
+        position: absolute;
+        top: 100px;
+        right: 55px;
+      }
+      .imgplanetdarkblue {
+        position: absolute;
+        top: 150px;
+        right: -150px;
+      }
+      .imgplanetyellow {
+        position: absolute;
+        bottom: -150px;
+        left: 500px;
+      }
+      .imgplanetblue {
+        position: absolute;
+        bottom: 100px;
+        right: 100px;
+      }
+      .imgpoint {
+        position: absolute;
+        animation-name: example;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        top: 200px;
+        right: 400px;
+      }
+      .imgtalking {
+        position: absolute;
+        top: 453px;
+        left: 300px;
+      }
+    </style>
+  </head>
+  <%- include('header'); %>
+  <body class="lockhorizontalscroll">
+    <!-- Start your project here-->
+    <%#- include('menu'); %>
+
+    <div class="parent">
+      <img class="imgspaceblue" src="/images/main/spaceblue.png" width="100%" />
+      <a href="/">
+        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/user/login">
+          <img
+            src="/images/main/login.png"
+            width="49px"
+            style="margin-right: 35px;"
+          />
+        </a>
+        <a href="/api/user/signup">
+          <img src="/images/main/register.png" width="66px" />
+        </a>
+      </div>
+      <img
+        class="imgplanetyellow"
+        src="/images/main/planet_yellow.png"
+        width="478px"
+      />
+      <img
+        class="imgplanetblue"
+        src="/images/main/planet_blue.png"
+        width="208px"
+      />
+      <img class="imgstars" src="/images/main/stars.png" width="1488px" />
+      <img
+        class="imgplanetdarkblue"
+        src="/images/main/planet_darkblue.png"
+        width="346px"
+      />
+      <img class="imgpoint" src="/images/main/P.png" width="545px" />
+    </div>
+    <img class="imgtalking" src="/images/main/talking.png" width="549px" />
+    <div style="height: 150px; width: 100%; background-color: #16223e;"></div>
+
+    <!-- End your project here-->
+    <%- include('footer'); %>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #e0e0e0;
+      }
+      .imgaccountbackground {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglogo {
+        position: absolute;
+        top: 47px;
+        left: 300px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 47px;
+        right: 300px;
+      }
+      .loginform {
+        position: absolute;
+        top: 200px;
+        left: 600px;
+      }
+      .imglogin {
+        position: absolute;
+        top: 100px;
+        left: 270px;
+      }
+      .loginformform {
+        position: absolute;
+        top: 250px;
+        left: 160px;
+      }
+      .buttongray {
+        background-color: #ffffff; /* Green */
+        border: none;
+        color: black;
+        padding: 10px 174px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 0px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 15pt;
+      }
+    </style>
+  </head>
+  <%- include('../header'); %>
+  <body>
+    <%#- include("../menu"); %>
+
+    <div class="parent" style="height: 100vh;">
+      <a href="/">
+        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/user/signup">
+          <img
+            src="/images/account/register_b.png"
+            width="66px"
+            style="margin-right: 35px;"
+          />
+        </a>
+      </div>
+      <div class="loginform">
+        <img
+          class="imgaccountbackground"
+          src="/images/account/account_background.png"
+          width="722"
+        />
+        <img
+          class="imglogin"
+          src="/images/account/login_big_w.png"
+          width="187"
+        />
+        <div class="loginformform" style="width: 400px;">
+          <form id="loginForm" class="text-center" action="#!">
+            <!-- Email -->
+            <div>
+              <input
+                type="email"
+                id="id"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="Email"
+              />
+            </div>
+
+            <!-- Password -->
+            <div style="margin-top: 40px;">
+              <input
+                type="password"
+                id="password"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="Password"
+                aria-describedby="materialRegisterFormPasswordHelpBlock"
+              />
+            </div>
+
+            <div style="margin-top: 40px;">
+              <button class="buttongray" type="submit">로그인</button>
+            </div>
+            <!-- Sign in button -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../footer'); %>
+    <script>
+      $(function () {
+        $("#loginForm").submit((event) => {
+          event.preventDefault();
+          // 로그인
+          const email = $("#id").val();
+          const password = $("#password").val();
+
+          $.ajax({
+            url: "/api/user/login",
+            type: "POST",
+            data: { email, password },
+          })
+            .done(() => {
+              location.href = "/api/point/";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../header'); %>
+  <body>
+    <%- include("../menu"); %>
+    <form id="createForm">
+      <!-- Material input -->
+      <div class="md-form" style="margin-right: 100px; margin-left: 100px;">
+        <input type="text" id="title" class="form-control" required />
+        <label for="title">Input Title</label>
+      </div>
+
+      <div class="md-form" style="margin-right: 100px; margin-left: 100px;">
+        <input type="number" id="year" class="form-control" required />
+        <label for="year">Input Year</label>
+      </div>
+
+      <div class="md-form" style="margin-right: 100px; margin-left: 100px;">
+        <input type="text" id="director" class="form-control" required />
+        <label for="director">Input Director</label>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-outline-primary waves-effect"
+        style="margin-left: 100px;"
+      >
+        + Add
+      </button>
+    </form>
+
+    <%- include('../footer'); %>
+    <script>
+      $(function () {
+        $("#createForm").submit((event) => {
+          event.preventDefault();
+          // 등록
+          const title = $("#title").val();
+          const year = $("#year").val();
+          const director = $("#director").val();
+
+          $.ajax({
+            url: "/api/movie",
+            type: "POST",
+            data: { title, year, director },
+          })
+            .done(() => {
+              location.href = "/api/movie";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

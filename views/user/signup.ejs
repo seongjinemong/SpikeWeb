@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #e0e0e0;
+      }
+      .imgaccountbackground {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglogo {
+        position: absolute;
+        top: 47px;
+        left: 300px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 47px;
+        right: 300px;
+      }
+      .loginform {
+        position: absolute;
+        top: 200px;
+        left: 600px;
+      }
+      .imgregister {
+        position: absolute;
+        top: 100px;
+        left: 235px;
+      }
+      .loginformform {
+        position: absolute;
+        top: 250px;
+        left: 160px;
+      }
+      .buttongray {
+        background-color: #ffffff; /* Green */
+        border: none;
+        color: black;
+        padding: 10px 165px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 0px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 15pt;
+      }
+    </style>
+  </head>
+  <%- include('../header'); %>
+  <body>
+    <%#- include("../menu"); %>
+
+    <div class="parent" style="height: 100vh;">
+      <a href="/">
+        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/user/login">
+          <img
+            src="/images/account/login_b.png"
+            width="49px"
+            style="margin-right: 35px;"
+          />
+        </a>
+      </div>
+      <div class="loginform">
+        <img
+          class="imgaccountbackground"
+          src="/images/account/account_background.png"
+          width="722"
+        />
+        <img
+          class="imgregister"
+          src="/images/account/register_big_w.png"
+          width="250"
+        />
+        <div class="loginformform" style="width: 400px;">
+          <form id="loginForm" class="text-center" action="#!">
+            <!-- Name -->
+            <div>
+              <input
+                type="text"
+                id="name"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="Name"
+              />
+            </div>
+
+            <!-- Email -->
+            <div style="margin-top: 30px;">
+              <input
+                type="email"
+                id="email"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="Email"
+              />
+            </div>
+
+            <!-- Password -->
+            <div style="margin-top: 30px;">
+              <input
+                type="password"
+                id="password"
+                required
+                class="form-control-lg form-control mb-4"
+                placeholder="Password"
+                aria-describedby="materialRegisterFormPasswordHelpBlock"
+              />
+            </div>
+
+            <div style="margin-top: 20px;">
+              <button class="buttongray" type="submit">회원가입</button>
+            </div>
+            <!-- Sign in button -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../footer'); %>
+    <script>
+      $(function () {
+        $("#loginForm").submit((event) => {
+          event.preventDefault();
+          // 등록
+          const name = $("#name").val();
+          const email = $("#email").val();
+          const password = $("#password").val();
+
+          console.log(name + "\n" + email + "\n" + password);
+
+          $.ajax({
+            url: "/api/user/signup",
+            type: "POST",
+            data: { name, email, password },
+          })
+            .done(() => {
+              alert("회원가입 성공");
+              location.href = "/api/user/login";
+            })
+            .fail((request, status, error) => {
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

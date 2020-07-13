@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../header'); %>
+  <body>
+    <%- include("../menu"); %>
+
+    <!-- Material input -->
+    <div class="md-form" style="margin-right: 100px; margin-left: 100px;">
+      <input
+        type="text"
+        id="singer"
+        value="<%= result.singer%>"
+        class="form-control"
+        readonly
+      />
+      <label for="singer">Singer</label>
+    </div>
+
+    <div class="md-form" style="margin-right: 100px; margin-left: 100px;">
+      <input
+        type="text"
+        id="title"
+        value="<%= result.title%>"
+        class="form-control"
+        readonly
+      />
+      <label for="title">Title</label>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary waves-effect"
+      style="margin-left: 100px;"
+      onclick="location.href='/api/music/'"
+    >
+      List
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary waves-effect"
+      onclick="location.href='/api/music/<%=result._id%>/edit'"
+    >
+      Edit
+    </button>
+
+    <button
+      id="deleteBtn"
+      type="button"
+      class="btn btn-outline-primary waves-effect"
+    >
+      Delete
+    </button>
+
+    <%- include('../footer'); %>
+
+    <script>
+      $(function () {
+        $("#deleteBtn").on("click", () => {
+          const result = confirm("삭제하시겠습니까?");
+          if (result) {
+            $.ajax({
+              url: "/api/music/<%= result._id %>",
+              type: "DELETE",
+            })
+              .done(() => {
+                location.href = "/api/music";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

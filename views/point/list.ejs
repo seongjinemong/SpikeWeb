@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body{
+        overflow:visible;
+      }
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglistspacebackground {
+        position: absolute;
+        top: 0;
+        right: -200px;
+      }
+      .imglogo {
+        position: absolute;
+        top: 47px;
+        left: 300px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 47px;
+        right: 300px;
+      }
+      .imgyourpoint {
+        position: absolute;
+        top: 279px;
+        left: 300px;
+      }
+      .name {
+        position: absolute;
+        top: 192px;
+        left: 300px;
+        font-size: 50pt;
+        font-weight: bold;
+      }
+      .imgaddpoint {
+        position: absolute;
+        top: 547px;
+        left: 300px;
+      }
+      .imgdeletepoint {
+        position: absolute;
+        top: 547px;
+        left: 508px;
+      }
+      .imgsendpoint {
+        position: absolute;
+        top: 547px;
+        right: 300px;
+      }
+      .imgPpoint {
+        position: absolute;
+        top: 269px;
+        right: 310px;
+      }
+      .txtPpoint {
+        position: absolute;
+        top: 245px;
+        right: 430px;
+        font-size: 80pt;
+        font-weight: bold;
+        color:white;
+      }
+      .pointblock {
+        position: relative;
+        height: 450px;
+        width: 25%;
+        align-content: center;
+        display: inline-block;
+        background-image: url("/images/list/pointblock_w.png");
+        margin-right: -10px;
+      }
+      .popup {
+        background: #57575799;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .deletepopup {
+        background: #57575799;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .popup-content {
+        height: 669px;
+        width: 722px;
+        background-image: url("/images/account/account_background.png");
+        background-size: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        position: relative;
+      }
+      .buttongray {
+        background-color: #ffffff; /* Green */
+        border: none;
+        color: black;
+        padding: 10px 182px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 0px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 15pt;
+      }
+      .close {
+        position: absolute;
+        text-align: center;
+        display: inline-block;
+        top: 550px;
+        left: 345px;
+      }
+      .deleteclose {
+        position: absolute;
+        text-align: center;
+        display: inline-block;
+        top: 550px;
+        left: 345px;
+      }
+      .parentpointblocks {
+        margin-top: 570px;
+        padding-bottom: 100px;
+        position: absolute;
+        margin-left: 250px;
+        margin-right: 250px;
+        /* display: inline-block; */
+        width: 1420px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .pointblockservice {
+        position: absolute;
+        top: 62%;
+        font-size: 20pt;
+        left: 52%;
+        transform: translateX(-50%);
+      }
+      .pointblockpoint {
+        position: absolute;
+        top: 72%;
+        font-size: 30pt;
+        left: 52%;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <%- include('../header'); %>
+  <body style="background-color: #e0e0e0;"" >
+    <%#- include("../menu"); %>
+
+    <div class="parent" style="height: 100vh;">
+      <img
+        class="imglistspacebackground"
+        src="/images/list/listspacebackground.png"
+        width="1300px"
+      />
+      <a href="/api/point">
+        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/user/logout">
+          <img
+            src="/images/list/logout.png"
+            width="66px"
+            style="margin-right: 35px;"
+          />
+        </a>
+      </div>
+      <img
+        class="imgyourpoint"
+        src="/images/list/yourpoint.png"
+        width="550px"
+      />
+      <div>
+        <p class="name"> <%= user.name %> 님의</p>
+      </div>
+      <a href="#" id="buttonaddpoint">
+        <img
+          class="imgaddpoint"
+          src="/images/list/addpoint.png"
+          width="171px"
+        />
+      </a>
+
+      <a href="#" id="buttondeletepoint">
+        <img
+          class="imgdeletepoint"
+          src="/images/list/deletepoint.png"
+          width="169px"
+        />
+      </a>
+      
+      <a href="/api/point/send" id="buttonsendpoint">
+        <img
+          class="imgsendpoint"
+          src="/images/list/pointsend.png"
+          width="155px"
+        />
+      </a>
+
+      <img class="imgPpoint" src="/images/list/Ppoint.png" width="83px" />
+      <p class="txtPpoint"> <%= sum %></p>
+
+      <div class="parentpointblocks">
+        <% result.forEach(point => { %>
+        <div class="pointblock">
+          <div>
+            <img
+              src="/images/bankicon/<%= point.service %>.png"
+              style="position: absolute; width: 130px; top: 35%; left: 50%; transform: translateX(-45%) translateY(-50%);"
+            />
+            <p class="pointblockservice"> <%= point.service %></p>
+            <p class="pointblockpoint"> <%= point.balance %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+
+      <!-- add Point Popup -->
+      <div class="popup">
+        <div class="popup-content">
+          <div
+            style="
+              height: 400px;
+              width: 400px;
+              margin: auto;
+              margin-top: 125px;
+            "
+          >
+            <div style="padding-bottom: 50px;">
+              <img src="/images/list/addpointtext.png" width="390px" />
+            </div>
+
+            <form id="addPointForm" class="text-center" action="#!">
+              <!-- Email -->
+              <div>
+                <input
+                  type="text"
+                  id="service"
+                  required
+                  class="form-control-lg form-control mb-4"
+                  placeholder="포인트회사"
+                />
+              </div>
+
+              <!-- Password -->
+              <div style="margin-top: 40px;">
+                <input
+                  type="number"
+                  id="balance"
+                  required
+                  class="form-control-lg form-control mb-4"
+                  placeholder="포인트"
+                  aria-describedby="materialRegisterFormPasswordHelpBlock"
+                />
+              </div>
+
+              <div style="margin-top: 40px;">
+                <button class="buttongray" type="submit">추가</button>
+              </div>
+
+              <div class="close">
+                <img src="/images/list/close.png" />
+              </div>
+              <!-- Sign in button -->
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="deletepopup">
+        <div class="popup-content">
+          <div
+            style="
+              height: 400px;
+              width: 400px;
+              margin: auto;
+              margin-top: 125px;
+            "
+          >
+            <div style="padding-bottom: 50px;">
+              <img src="/images/list/deletepointtext.png" width="390px" />
+            </div>
+
+            <form id="deletePointForm" class="text-center" action="#!">
+              <!-- Email -->
+              <select name="service" id="deleteservice" required style="width: 400px; margin-top: 50px;">
+                <% result.forEach(point => { %>
+                <option value="<%= point.service %>"><%= point.service %></option>
+                <% }) %>
+              </select>
+
+              <div style="margin-top: 40px;">
+                <button class="buttongray" type="submit">삭제</button>
+              </div>
+
+              <div class="deleteclose">
+                <img src="/images/list/close.png" />
+              </div>
+              <!-- Sign in button -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../footer'); %>
+    <script>
+      $(function () {
+        console.log("addpoint function called");
+        $("#addPointForm").submit((event) => {
+          console.log("submit button clicked");
+
+          event.preventDefault();
+          // 로그인
+          const service = $("#service").val();
+          const balance = $("#balance").val();
+
+          console.log(service + "\n" + balance);
+
+          $.ajax({
+            url: "/api/point",
+            type: "POST",
+            data: { service, balance },
+          })
+            .done(() => {
+              alert("추가 완료!");
+              location.href = "/api/point/";
+            })
+            .fail((request, status, error) => {
+              console.log(request.responseText);
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+
+    <script>
+      $(function () {
+        console.log("deletepoint function called");
+        $("#deletePointForm").submit((event) => {
+          console.log("submit button clicked");
+          event.preventDefault();
+          // 로그인
+          const service = $("#deleteservice").val();
+          console.log(service);
+
+          $.ajax({
+            url: "/api/point",
+            type: "DELETE",
+            data: { service },
+          })
+            .done(() => {
+              alert("삭제 완료!");
+              location.href = "/api/point/";
+            })
+            .fail((request, status, error) => {
+              console.log(request.responseText);
+              alert(request.responseText);
+            });
+        });
+      });
+    </script>
+
+    <script>
+      document
+        .getElementById("buttonaddpoint")
+        .addEventListener("click", function () {
+          document.querySelector(".popup").style.display = "flex";
+          document.querySelector("body").style.overflow = "hidden";
+      });
+
+      document.querySelector(".close").addEventListener("click", function () {
+        document.querySelector(".popup").style.display = "none";
+        document.querySelector("body").style.overflow = "visible";
+      });
+    </script>
+
+<script>
+  document
+    .getElementById("buttondeletepoint")
+    .addEventListener("click", function () {
+      document.querySelector(".deletepopup").style.display = "flex";
+      document.querySelector("body").style.overflow = "hidden";
+  });
+
+  document.querySelector(".deleteclose").addEventListener("click", function () {
+    document.querySelector(".deletepopup").style.display = "none";
+    document.querySelector("body").style.overflow = "visible";
+  });
+</script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+1. 관계형 데이터베이스
+    테이블 스키마 고정
+    SQL로 CRUD 처리
+
+2. NoSQL (nonSQL, Not Only SQL) : MongoDB
+    스키마 유동적
+    단순 검색/추가에 용이
+    빅데이터, 분산 처리 용이
+
+3. 설치
+
+4. 시작
+    mongod --dbpath=data
+    
+    show dbs
+    show collections
+    use database_name
+    db.collection_name.
+    .. drop()
+    .. insert()
+    .. find(condition, [show_field_bool])
+    .. limit(n)
+    .. update(condition, updated_data) //전체 수정
+    .. update(condition, {$set: updated_object}) //특정 키값만
+
+- db
+- show dbs
+- use "db명" : switch, create database
+- db.createCollection("콜렉션명")
+- show collections
+- new "db명"
+- db.music.drop()
+- db.music.insert({singer: "Conan Gray", title:"Maniac"}) // JSON 형식
+- db.music.find()
+- db.music.find().pretty()
+- db.music.find({singer:"Maroon5"}) // JSON 형식
+- db.music.find({}, {_id: 0, singer: 1, title: 1})
+- db.music.find().limit(1)
+- db.music.update({title:"Maniac"}, {singer:"Conan", title:"Maniac"}) // (조건, 수정데이터)
+- db.music.update({singer:"Conan"}, {$set: {title:"Maniacc"}}) // (조건, {$set: (수정데이터)})
+- db.music.remove({}) // 전체 삭제
+- db.music.remove({삭제조건}) // 전체 삭제
+
+참고: https://docs.mongodb.com/manual/tutorial/insert-documents/
+
+
+
+6. ODM(Object Data Mapping) 도구 - Mongoose
+- npm i Mongoose
+- mongoose.connection 설정
+- Schema 생성
+- model 생성
