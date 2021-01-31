@@ -100,7 +100,12 @@ const checkAuth = (req, res, next) => {
       if (err) return res.status(500).send("인증 시 오류가 발생했습니다");
       if (!user) return res.render("user/login");
 
-      res.locals.user = { name: user.name, role: user.role, userid: _id };
+      res.locals.user = {
+        name: user.name,
+        role: user.role,
+        userid: _id,
+        email: user.email,
+      };
       next();
     });
   });

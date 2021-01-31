@@ -10,39 +10,39 @@
       }
       .imgaccountbackground {
         position: relative;
-        top: 0;
-        left: 0;
+        top: 50;
+        left: 50;
       }
       .imglogo {
         position: absolute;
-        top: 47px;
-        left: 300px;
+        top: 30px;
+        left: 30px;
       }
       .imgaccount {
         position: absolute;
-        top: 47px;
-        right: 300px;
+        top: 30px;
+        right: 30px;
       }
       .loginform {
         position: absolute;
-        top: 200px;
-        left: 600px;
+        top: 150px;
+        left: 30px;
       }
       .imglogin {
         position: absolute;
-        top: 100px;
-        left: 270px;
+        top: 50px;
+        left: 150px;
       }
       .loginformform {
         position: absolute;
-        top: 250px;
-        left: 160px;
+        top: 110px;
+        left: 60px;
       }
       .buttongray {
         background-color: #ffffff; /* Green */
         border: none;
         color: black;
-        padding: 10px 174px;
+        padding: 10px 110px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -61,29 +61,25 @@
 
     <div class="parent" style="height: 100vh;">
       <a href="/">
-        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+        <img class="imglogo" src="/images/main/logo.png" width="100px" />
       </a>
       <div class="imgaccount">
         <a href="/api/user/signup">
-          <img
-            src="/images/account/register_b.png"
-            width="66px"
-            style="margin-right: 35px;"
-          />
+          <img src="/images/account/register_b.png" width="66px" />
         </a>
       </div>
       <div class="loginform">
         <img
           class="imgaccountbackground"
           src="/images/account/account_background.png"
-          width="722"
+          width="400"
         />
         <img
           class="imglogin"
           src="/images/account/login_big_w.png"
-          width="187"
+          width="100"
         />
-        <div class="loginformform" style="width: 400px;">
+        <div class="loginformform" style="width: 200;">
           <form id="loginForm" class="text-center" action="#!">
             <!-- Email -->
             <div>
@@ -97,7 +93,7 @@
             </div>
 
             <!-- Password -->
-            <div style="margin-top: 40px;">
+            <div style="margin-top: 0px;">
               <input
                 type="password"
                 id="password"
@@ -108,7 +104,7 @@
               />
             </div>
 
-            <div style="margin-top: 40px;">
+            <div style="margin-top: 0px;">
               <button class="buttongray" type="submit">로그인</button>
             </div>
             <!-- Sign in button -->

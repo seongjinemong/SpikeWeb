@@ -10,39 +10,39 @@
       }
       .imgaccountbackground {
         position: relative;
-        top: 0;
-        left: 0;
+        top: 50;
+        left: 50;
       }
       .imglogo {
         position: absolute;
-        top: 47px;
-        left: 300px;
+        top: 30px;
+        left: 30px;
       }
       .imgaccount {
         position: absolute;
-        top: 47px;
-        right: 300px;
+        top: 30px;
+        right: 30px;
       }
       .loginform {
         position: absolute;
-        top: 200px;
-        left: 600px;
+        top: 150px;
+        left: 30px;
       }
       .imgregister {
         position: absolute;
-        top: 100px;
-        left: 235px;
+        top: 50px;
+        left: 140px;
       }
       .loginformform {
         position: absolute;
-        top: 250px;
-        left: 160px;
+        top: 110px;
+        left: 60px;
       }
       .buttongray {
         background-color: #ffffff; /* Green */
         border: none;
         color: black;
-        padding: 10px 165px;
+        padding: 10px 110px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -61,29 +61,30 @@
 
     <div class="parent" style="height: 100vh;">
       <a href="/">
-        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+        <img class="imglogo" src="/images/main/logo.png" width="100" />
       </a>
       <div class="imgaccount">
         <a href="/api/user/login">
           <img
             src="/images/account/login_b.png"
             width="49px"
-            style="margin-right: 35px;"
+            style="margin-right: 0px;"
           />
         </a>
       </div>
       <div class="loginform">
         <img
           class="imgaccountbackground"
-          src="/images/account/account_background.png"
-          width="722"
+          src="/images/account/registerspacebackground.png"
+          width="400"
+          height="450px"
         />
         <img
           class="imgregister"
           src="/images/account/register_big_w.png"
-          width="250"
+          width="140"
         />
-        <div class="loginformform" style="width: 400px;">
+        <div class="loginformform" style="width: 200;">
           <form id="loginForm" class="text-center" action="#!">
             <!-- Name -->
             <div>
@@ -97,7 +98,7 @@
             </div>
 
             <!-- Email -->
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 0px;">
               <input
                 type="email"
                 id="email"
@@ -108,7 +109,7 @@
             </div>
 
             <!-- Password -->
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 0px;">
               <input
                 type="password"
                 id="password"
@@ -119,7 +120,7 @@
               />
             </div>
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 0px;">
               <button class="buttongray" type="submit">회원가입</button>
             </div>
             <!-- Sign in button -->

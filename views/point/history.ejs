@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body{
+        overflow:visible;
+      }
+      .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .imglogo {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+      }
+      .imgaccount {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+      }
+      .name {
+        position: absolute;
+        top: 137px;
+        right: 207px;
+        font-weight: bold;
+        font-size: 16pt;
+      }
+      .imgPpoint {
+        position: absolute;
+        top: 170px;
+        right: 30px;
+      }
+      .imgyourpoint {
+        position: absolute;
+        top: 140px;
+        right: 35px;
+      }
+      .imgdecoration {
+        position: absolute;
+        top: 250px;
+        right: 0px;
+      }
+      .txtPpoint {
+        position: absolute;
+        top: 145px;
+        right: 100px;
+        font-size: 55pt;
+        font-weight: bold;
+      }
+      .pointblock {
+        margin-top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: relative;
+        height: 92px;
+        width: 417px;
+        align-content: center;
+        display: inline-block;
+        background-image: url("/images/list/pointblock_w_s_x.png");
+      }
+      .parentpointblocks {
+        margin-top: 300px;
+        padding-bottom: 20px;
+        position: absolute;
+        /* margin-left: 250px;
+        margin-right: 250px; */
+        /* display: inline-block; */
+        width: 468px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .pointblockrecipient {
+        position: absolute;
+        top: 30%;
+        font-size: 15pt;
+        right: 13%;
+        transform: translateX(-50%);
+        transform: translateY(-50%);
+      }
+      .pointblockservice {
+        position: absolute;
+        top: 70%;
+        font-size: 15pt;
+        left: 30%;
+        transform: translateX(-50%);
+        transform: translateY(-50%);
+      }
+      .pointblockpoint {
+        position: absolute;
+        top: 65%;
+        font-size: 25pt;
+        right: 13%;
+        transform: translateX(-50%);
+        transform: translateY(-50%);
+      }
+      .txtdate{
+        position:relative;
+        transform: translateX(-50%);
+        font-size: 16pt;
+      }
+    </style>
+  </head>
+  <%- include('../header'); %>
+  <body style="background-color: #e0e0e0;"" >
+    <%#- include("../menu"); %>
+
+    <div class="parent" style="height: 100vh;">
+      <a href="/api/point">
+        <img class="imglogo" src="/images/main/logo.png" width="100px" />
+      </a>
+      <div class="imgaccount">
+        <a href="/api/user/logout">
+          <img
+            src="/images/list/logout_b.png"
+            width="66px"
+          />
+        </a>
+      </div>
+
+      <p class="name"> <%= user.name %></p>
+      <img class="imgyourpoint" src="/images/list/usedpoint.png" width="170px" />
+      <img class="imgPpoint" src="/images/list/Ppoint_b.png" width="52px" />
+      <p class="txtPpoint"> <%= sum*(-1) %></p>
+
+      <img class="imgdecoration" src="/images/list/historydecoration.png" width="170px" />
+
+      <div class="parentpointblocks">
+        <% result.forEach(point => { %>
+        <div class="pointblock">
+          <div>
+            <img
+              src="/images/bankicon/<%= point.service %>.png"
+              style="position: absolute; width: 60px; top: 50%; left: 17%; transform: translateX(-50%) translateY(-50%);"
+            />
+            <p class="pointblockservice"> <%= point.service %></p>
+            <p class="pointblockrecipient"> <%= point.recipient == user.email ? point.useremail + ' -> 나' : '나 -> ' + point.recipient %></p>
+            <p class="pointblockpoint"> <%= point.recipient == user.email ? '+' + point.balance*(-1) : point.balance %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('../footer'); %>
+
+    <script>
+      document
+        .getElementById("buttonaddpoint")
+        .addEventListener("click", function () {
+          document.querySelector(".popup").style.display = "flex";
+          document.querySelector("body").style.overflow = "hidden";
+      });
+
+      document.querySelector(".close").addEventListener("click", function () {
+        document.querySelector(".popup").style.display = "none";
+        document.querySelector("body").style.overflow = "visible";
+      });
+    </script>
+
+    <script>
+    document
+        .getElementById("buttondeletepoint")
+        .addEventListener("click", function () {
+        document.querySelector(".deletepopup").style.display = "flex";
+        document.querySelector("body").style.overflow = "hidden";
+    });
+
+    document.querySelector(".deleteclose").addEventListener("click", function () {
+        document.querySelector(".deletepopup").style.display = "none";
+        document.querySelector("body").style.overflow = "visible";
+    });
+    </script>
+  </body>
+</html>

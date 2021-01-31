@@ -1,5 +1,6 @@
 const PointModel = require("../../models/point");
 const UserModel = require("../../models/user");
+const HistoryModel = require("../../models/history");
 const mongoose = require("mongoose");
 
 const list = (req, res) => {
@@ -85,6 +86,7 @@ const send = (req, res) => {
   console.log("send function called");
 
   const { service, balance, recipient } = req.body;
+  const useremail = res.locals.user.email;
 
   if (!service || !balance || !recipient)
     return res.status(400).send("필수 항목이 입력되지 않았습니다.");
@@ -144,6 +146,21 @@ const send = (req, res) => {
               //res.json(sendresult);
             }
           );
+          const user = new HistoryModel({
+            userid: userid,
+            useremail: useremail,
+            recipient: recipient,
+            service: service,
+            balance: balance * -1,
+            date: Date.now(),
+          });
+          user.save((err, result) => {
+            if (err)
+              return res
+                .status(500)
+                .send("사용기록 추가 중 오류가 발생했습니다.");
+            //res.status(201).json(result);
+          });
         }
       );
     });
@@ -161,4 +178,33 @@ const remove = (req, res) => {
   });
 };
 
-module.exports = { list, addpoint, showSendPage, send, remove };
+const history = (req, res) => {
+  console.log(typeof req.query.limit); // "3"
+  const limit = parseInt(req.query.limit || 10, 10);
+  if (Number.isNaN(limit)) {
+    return res.status(400).end();
+  }
+
+  const userid = res.locals.user.userid;
+  const useremail = res.locals.user.email;
+
+  HistoryModel.find(
+    { $or: [{ userid: userid }, { recipient: useremail }] },
+    (err, result) => {
+      if (err) return res.status(500).send("정보 가져오는 중 오류쓰");
+
+      var sum = 0;
+      result.forEach((point) => {
+        if (point.recipient == useremail) sum -= point.balance;
+        else sum += point.balance;
+      });
+
+      res.render("point/history", { result, sum });
+      console.log(result);
+    }
+  )
+    .limit(limit)
+    .sort({ date: -1 });
+};
+
+module.exports = { list, addpoint, showSendPage, send, remove, history };

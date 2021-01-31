@@ -13,67 +13,60 @@
       .imglistspacebackground {
         position: absolute;
         top: 0;
-        right: -200px;
+        right: -100px;
       }
       .imglogo {
         position: absolute;
-        top: 47px;
-        left: 300px;
+        top: 30px;
+        left: 30px;
       }
       .imgaccount {
         position: absolute;
-        top: 47px;
-        right: 300px;
-      }
-      .imgyourpoint {
-        position: absolute;
-        top: 279px;
-        left: 300px;
+        top: 30px;
+        right: 30px;
       }
       .name {
         position: absolute;
-        top: 192px;
-        left: 300px;
-        font-size: 50pt;
-        font-weight: bold;
+        top: 135px;
+        right: 145px;
+        font-size: 16pt;
+        color: white;
       }
       .imgaddpoint {
         position: absolute;
-        top: 547px;
-        left: 300px;
+        top: 340px;
+        left: 40px;
       }
       .imgdeletepoint {
         position: absolute;
-        top: 547px;
-        left: 508px;
+        top: 340px;
+        right: 40px;
       }
       .imgsendpoint {
         position: absolute;
-        top: 547px;
-        right: 300px;
+        top: 390px;
+        transform: translateX(-50%);
+        left: 50%;
       }
       .imgPpoint {
         position: absolute;
-        top: 269px;
-        right: 310px;
+        top: 170px;
+        right: 30px;
+      }
+      .imgyourpoint {
+        position: absolute;
+        top: 140px;
+        right: 35px;
       }
       .txtPpoint {
         position: absolute;
-        top: 245px;
-        right: 430px;
-        font-size: 80pt;
+        top: 145px;
+        right: 100px;
+        font-size: 55pt;
         font-weight: bold;
         color:white;
       }
-      .pointblock {
-        position: relative;
-        height: 450px;
-        width: 25%;
-        align-content: center;
-        display: inline-block;
-        background-image: url("/images/list/pointblock_w.png");
-        margin-right: -10px;
-      }
+      
       .popup {
         background: #57575799;
         width: 100%;
@@ -97,7 +90,7 @@
         text-align: center;
       }
       .popup-content {
-        height: 669px;
+        height: 433px;
         width: 722px;
         background-image: url("/images/account/account_background.png");
         background-size: 100%;
@@ -109,7 +102,7 @@
         background-color: #ffffff; /* Green */
         border: none;
         color: black;
-        padding: 10px 182px;
+        padding: 10px 132px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -124,40 +117,67 @@
         position: absolute;
         text-align: center;
         display: inline-block;
-        top: 550px;
-        left: 345px;
+        top: 370px;
+        left: 50%;
+        transform: translateX(-50%);
       }
       .deleteclose {
         position: absolute;
         text-align: center;
         display: inline-block;
-        top: 550px;
-        left: 345px;
+        top: 370px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .pointblock {
+        margin-top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: relative;
+        height: 92px;
+        width: 417px;
+        align-content: center;
+        display: inline-block;
+        background-image: url("/images/list/pointblock_w_s_x.png");
       }
       .parentpointblocks {
-        margin-top: 570px;
-        padding-bottom: 100px;
+        margin-top: 542px;
+        padding-bottom: 20px;
         position: absolute;
-        margin-left: 250px;
-        margin-right: 250px;
+        /* margin-left: 250px;
+        margin-right: 250px; */
         /* display: inline-block; */
-        width: 1420px;
+        width: 468px;
         overflow-y: auto;
         overflow-x: hidden;
       }
       .pointblockservice {
         position: absolute;
-        top: 62%;
-        font-size: 20pt;
-        left: 52%;
+        top: 30%;
+        font-size: 15pt;
+        right: 13%;
         transform: translateX(-50%);
+        transform: translateY(-50%);
       }
       .pointblockpoint {
         position: absolute;
-        top: 72%;
-        font-size: 30pt;
-        left: 52%;
+        top: 65%;
+        font-size: 25pt;
+        right: 13%;
         transform: translateX(-50%);
+        transform: translateY(-50%);
+      }
+      .history{
+        margin-top: 440px;
+        left:50%;
+        transform: translateX(-50%);
+        position: absolute;
+        width: 417;
+      }
+      .imgdecoration {
+        position: absolute;
+        top: 600px;
+        left: 0px;
       }
     </style>
   </head>
@@ -169,28 +189,20 @@
       <img
         class="imglistspacebackground"
         src="/images/list/listspacebackground.png"
-        width="1300px"
+        width="600px"
       />
       <a href="/api/point">
-        <img class="imglogo" src="/images/main/logo.png" width="130px" />
+        <img class="imglogo" src="/images/main/logo.png" width="100px" />
       </a>
       <div class="imgaccount">
         <a href="/api/user/logout">
           <img
             src="/images/list/logout.png"
             width="66px"
-            style="margin-right: 35px;"
           />
         </a>
       </div>
-      <img
-        class="imgyourpoint"
-        src="/images/list/yourpoint.png"
-        width="550px"
-      />
-      <div>
-        <p class="name"> <%= user.name %> 님의</p>
-      </div>
+      
       <a href="#" id="buttonaddpoint">
         <img
           class="imgaddpoint"
@@ -215,8 +227,20 @@
         />
       </a>
 
-      <img class="imgPpoint" src="/images/list/Ppoint.png" width="83px" />
+      <a href="/api/point/history" id="buttonhistory">
+        <img
+          class="history"
+          src="/images/list/history.png"
+          width="417"
+        />
+      </a>
+
+      <p class="name"> <%= user.name %></p>
+      <img class="imgyourpoint" src="/images/list/userpoint.png" width="101px" />
+      <img class="imgPpoint" src="/images/list/Ppoint.png" width="52px" />
       <p class="txtPpoint"> <%= sum %></p>
+
+      <img class="imgdecoration" src="/images/list/listdecoration.png" width="170px" />
 
       <div class="parentpointblocks">
         <% result.forEach(point => { %>
@@ -224,7 +248,7 @@
           <div>
             <img
               src="/images/bankicon/<%= point.service %>.png"
-              style="position: absolute; width: 130px; top: 35%; left: 50%; transform: translateX(-45%) translateY(-50%);"
+              style="position: absolute; width: 60px; top: 50%; left: 17%; transform: translateX(-50%) translateY(-50%);"
             />
             <p class="pointblockservice"> <%= point.service %></p>
             <p class="pointblockpoint"> <%= point.balance %></p>
@@ -233,19 +257,21 @@
         <% }) %>
       </div>
 
+      
+
       <!-- add Point Popup -->
       <div class="popup">
         <div class="popup-content">
           <div
             style="
               height: 400px;
-              width: 400px;
+              width: 300px;
               margin: auto;
-              margin-top: 125px;
+              margin-top: 50px;
             "
           >
-            <div style="padding-bottom: 50px;">
-              <img src="/images/list/addpointtext.png" width="390px" />
+            <div style="padding-bottom: 20px;">
+              <img src="/images/list/addpointtext.png" width="270px" />
             </div>
 
             <form id="addPointForm" class="text-center" action="#!">
@@ -261,7 +287,7 @@
               </div>
 
               <!-- Password -->
-              <div style="margin-top: 40px;">
+              <div style="margin-top: 0px;">
                 <input
                   type="number"
                   id="balance"
@@ -272,7 +298,7 @@
                 />
               </div>
 
-              <div style="margin-top: 40px;">
+              <div style="margin-top: 0px;">
                 <button class="buttongray" type="submit">추가</button>
               </div>
 
@@ -290,24 +316,24 @@
           <div
             style="
               height: 400px;
-              width: 400px;
+              width: 300px;
               margin: auto;
-              margin-top: 125px;
+              margin-top: 50px;
             "
           >
-            <div style="padding-bottom: 50px;">
-              <img src="/images/list/deletepointtext.png" width="390px" />
+            <div style="padding-bottom: 20px;">
+              <img src="/images/list/deletepointtext.png" width="270px" />
             </div>
 
             <form id="deletePointForm" class="text-center" action="#!">
               <!-- Email -->
-              <select name="service" id="deleteservice" required style="width: 400px; margin-top: 50px;">
+              <select name="service" id="deleteservice" required style="width: 300px; margin-top: 50px;">
                 <% result.forEach(point => { %>
                 <option value="<%= point.service %>"><%= point.service %></option>
                 <% }) %>
               </select>
 
-              <div style="margin-top: 40px;">
+              <div style="margin-top: 20px;">
                 <button class="buttongray" type="submit">삭제</button>
               </div>
 

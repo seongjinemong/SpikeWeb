@@ -10,5 +10,6 @@ router.post("/", ctrl.addpoint); // 포인트 추가
 router.get("/send", ctrl.showSendPage);
 router.post("/send", ctrl.send);
 router.delete("/", ctrl.remove);
+router.get("/history", ctrl.history);
 
 module.exports = router;
